@@ -1,33 +1,40 @@
-﻿using System;
+﻿using StellarPointer.WebApi.Models;
+using StellarPointer.WebApi.Models.Coordinates;
+using System;
 using System.IO.Ports;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace StellarPointer.SerialWriter
+namespace StellarPointer.WebApi
 {
-    public class Program
+    public class SerialWriter
     {
-        public static async Task Main()
+        private readonly EphemerisApiUrlBuilder ephemerisApiUrlBuilder;
+
+        public SerialWriter()
+        {
+            ephemerisApiUrlBuilder = new EphemerisApiUrlBuilder();
+        }
+
+        public async Task PointSkyObject(StellarObjectDesignation stellarObjectDesignation)
         {
             var observer = new Observer
             {
-                // long, lat, alt
+                Latitude = 45.42546991419586,
+                Longitude = 23.9497447013855,
+                Altitude = 595
             };
 
             double epoch = GetJulianDate(DateTime.Now);
-            const string planetName = "Jupiter";
-            PlanetCoordinates planetCoordinates = await GetPlanetCoordinates(planetName, epoch, observer);
+            PlanetCoordinates planetCoordinates = await GetPlanetCoordinates(stellarObjectDesignation, epoch, observer);
 
             var rightAscension = new RightAscension();
             rightAscension.ConvertFromArcSec(planetCoordinates.RightAscensionInArcSec);
 
             var declination = new Declination();
             declination.ConvertFromArcSec(planetCoordinates.DeclinationInArcSec);
-
-            Console.WriteLine($"Right ascension: {planetCoordinates.RightAscensionInArcSec}");
-            Console.WriteLine($"Declination: {planetCoordinates.DeclinationInArcSec}");
 
             CelestialCoordinates celestialCoordinates = EquatorialCoordinatesConverter.ToCelestialCoordinates(
                 rightAscension.Longitude,
@@ -37,8 +44,6 @@ namespace StellarPointer.SerialWriter
 
             double roundedAltitude = Math.Round(celestialCoordinates.Altitude);
             double roundedAzimuth = Math.Round(celestialCoordinates.Azimuth);
-            Console.WriteLine($"Round azimuth: {roundedAzimuth}");
-            Console.WriteLine($"Round altitude: {roundedAltitude}");
 
             double servoMotorValue = roundedAltitude;
 
@@ -67,16 +72,23 @@ namespace StellarPointer.SerialWriter
 
                 serialPort.WriteLine(command);
             }
-
-            Console.ReadKey();
         }
 
-        public static async Task<PlanetCoordinates> GetPlanetCoordinates(string planetName, double epoch, Observer observer)
+        private async Task<PlanetCoordinates> GetPlanetCoordinates(StellarObjectDesignation stellarObjectDesignation,
+            double epochInJulianDate,
+            Observer observer)
         {
             using (var httpClient = new HttpClient())
             {
-                string apiUrl =
-                    $"https://ssp.imcce.fr/webservices/miriade/api/ephemcc.php?-name=p:{planetName}&-ep={epoch}&-mime=json&-observer={observer.Latitude},{observer.Longitude},{observer.Altitude}&-tcoor=1&-teph=2";
+                string apiUrl = ephemerisApiUrlBuilder
+                    .AddName(stellarObjectDesignation)
+                    .AddEpoch(epochInJulianDate)
+                    .AddJsonMime()
+                    .AddObserver(observer)
+                    .AddCoordinateTypeOne()
+                    .AddEphemerisTypeTwo()
+                    .Build();
+
                 HttpResponseMessage planetCoordinatesResponse = await httpClient.GetAsync(apiUrl);
                 planetCoordinatesResponse.EnsureSuccessStatusCode();
                 string planetCoordinatesResponseBody = await planetCoordinatesResponse.Content.ReadAsStringAsync();
@@ -88,7 +100,7 @@ namespace StellarPointer.SerialWriter
             }
         }
 
-        public static double GetJulianDate(DateTime date)
+        private static double GetJulianDate(DateTime date)
         {
             const double julianDateOffset = 2415018.5;
             return date.ToOADate() + julianDateOffset;

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using StellarPointer.WebApi.Models.Constants;
+using System;
 
-namespace StellarPointer.SerialWriter
+namespace StellarPointer.WebApi.Models.Coordinates
 {
     public class Declination
     {

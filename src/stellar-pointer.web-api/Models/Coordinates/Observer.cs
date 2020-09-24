@@ -1,4 +1,4 @@
-﻿namespace StellarPointer.SerialWriter
+﻿namespace StellarPointer.WebApi.Models.Coordinates
 {
     public class Observer
     {

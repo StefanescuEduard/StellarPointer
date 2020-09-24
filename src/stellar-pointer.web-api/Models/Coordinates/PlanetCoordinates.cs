@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace StellarPointer.SerialWriter
+namespace StellarPointer.WebApi.Models.Coordinates
 {
     public class PlanetCoordinates
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StellarPointer.SerialWriter
+namespace StellarPointer.WebApi.Models.Coordinates
 {
     /*
      * Source: https://gist.github.com/matshofman/4145718

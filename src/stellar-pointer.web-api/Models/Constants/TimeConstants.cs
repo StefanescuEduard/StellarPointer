@@ -1,4 +1,4 @@
-﻿namespace StellarPointer.SerialWriter
+﻿namespace StellarPointer.WebApi.Models.Constants
 {
     public static class TimeConstants
     {
