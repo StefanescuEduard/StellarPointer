@@ -120,7 +120,6 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PlanetController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="EphemerisApiUrlBuilder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
