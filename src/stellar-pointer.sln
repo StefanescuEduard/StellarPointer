@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stellar-pointer.web-api", "stellar-pointer.web-api\stellar-pointer.web-api.csproj", "{34B3EAB2-D88C-40B9-8DE9-4E724C407095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "stellar-pointer.web-api", "stellar-pointer.web-api\stellar-pointer.web-api.csproj", "{3398A9A7-4D57-453F-AA39-A20DABE117AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{34B3EAB2-D88C-40B9-8DE9-4E724C407095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34B3EAB2-D88C-40B9-8DE9-4E724C407095}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34B3EAB2-D88C-40B9-8DE9-4E724C407095}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34B3EAB2-D88C-40B9-8DE9-4E724C407095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3398A9A7-4D57-453F-AA39-A20DABE117AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3398A9A7-4D57-453F-AA39-A20DABE117AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3398A9A7-4D57-453F-AA39-A20DABE117AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3398A9A7-4D57-453F-AA39-A20DABE117AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

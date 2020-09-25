@@ -8,7 +8,7 @@ export class StellarObjectService {
   private readonly apiUrl;
 
   constructor(private http: HttpClient) {
-    this.apiUrl = 'https://localhost:44373/api/planet';
+    this.apiUrl = 'http://192.168.0.120:8081/api/planet';
   }
 
   pointStellarObject(

@@ -1,10 +1,12 @@
-﻿using StellarPointer.WebApi.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using StellarPointer.WebApi.Models;
 using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace StellarPointer.WebApi.Controllers
 {
-    public class PlanetController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class PlanetController : ControllerBase
     {
         private readonly SerialWriter serialWriter;
 

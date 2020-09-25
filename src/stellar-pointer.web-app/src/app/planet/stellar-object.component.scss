@@ -1,5 +1,7 @@
 .stellar-object-container {
   display: flex;
+  flex-direction: row;
+  column-gap: 16px;
   align-items: center;
   cursor: pointer;
 

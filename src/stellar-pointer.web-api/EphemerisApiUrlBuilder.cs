@@ -11,7 +11,7 @@ namespace StellarPointer.WebApi
         public EphemerisApiUrlBuilder()
         {
             apiUrlBuilder = new StringBuilder();
-            apiUrlBuilder.Append("https://ssp.imcce.fr/webservices/miriade/api/ephemcc.php?");
+            apiUrlBuilder.Append("http://ssp.imcce.fr/webservices/miriade/api/ephemcc.php?");
         }
 
         public EphemerisApiUrlBuilder AddName(StellarObjectDesignation stellarObjectDesignation)
