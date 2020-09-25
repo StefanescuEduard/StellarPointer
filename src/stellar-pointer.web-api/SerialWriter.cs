@@ -22,9 +22,7 @@ namespace StellarPointer.WebApi
         {
             var observer = new Observer
             {
-                Latitude = 45.42546991419586,
-                Longitude = 23.9497447013855,
-                Altitude = 595
+
             };
 
             double epoch = GetJulianDate(DateTime.Now);
