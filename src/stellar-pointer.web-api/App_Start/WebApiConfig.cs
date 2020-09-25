@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace StellarPointer.WebApi
 {
@@ -16,6 +17,9 @@ namespace StellarPointer.WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");
+            config.EnableCors(cors);
         }
     }
 }

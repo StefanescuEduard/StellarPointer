@@ -1,0 +1,6 @@
+<mat-card class="stellar-object-container" [ngStyle]="{'background-color': stellarObject.backgroundColor}" (click)="pointStellarObject()">
+  <span class="stellar-object-name">
+    {{stellarObject.name}}
+  </span>
+  <img [src]="stellarObject.iconPath">
+</mat-card>

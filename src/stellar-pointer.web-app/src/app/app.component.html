@@ -1,2 +1,7 @@
-  <div class="planets-background"></div>
-  <div class="sketch-planets-background"></div>
+<div class="stellar-objects-wrapper">
+    <div class="planets-background"></div>
+    <mat-card class="stellar-objects-container mat-elevation-z8">
+        <sp-stellar-object *ngFor="let stellarObject of stellarObjects" [stellarObject]="stellarObject">
+        </sp-stellar-object>
+    </mat-card>
+</div>

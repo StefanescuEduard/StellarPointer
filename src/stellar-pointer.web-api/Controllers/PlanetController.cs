@@ -14,7 +14,7 @@ namespace StellarPointer.WebApi.Controllers
         }
 
         [HttpPost]
-        public Task PointPlanet([FromBody] StellarObjectDesignation stellarObjectDesignation)
+        public Task PointStellarObject([FromBody] StellarObjectDesignation stellarObjectDesignation)
         {
             return serialWriter.PointSkyObject(stellarObjectDesignation);
         }

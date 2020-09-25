@@ -1,0 +1,16 @@
+.stellar-object-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  .stellar-object-name {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  img {
+    height: 48px;
+    width: 48px;
+    margin-left: auto;
+  }
+}
