@@ -29,6 +29,13 @@
     row-gap: 24px;
     overflow: auto;
   }
+  
+  .toolbar {
+    position: absolute;
+    display: flex;
+    column-gap: 16px;
+    justify-content: center;
+  }
 }
 
 @media only screen and (max-width: 720px) {
