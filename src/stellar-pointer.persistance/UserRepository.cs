@@ -11,7 +11,7 @@ namespace StellarPointer.Persistence
         public async Task AddFavoriteStellarObjectAsync(string username, string stellarObjectName)
         {
             User user = await GetAsync(username);
-            user.FavoriteStellarObjects.Add(stellarObjectName);
+            user.FavoriteCelestialBodies.Add(stellarObjectName);
 
             await AddAsync(user);
         }

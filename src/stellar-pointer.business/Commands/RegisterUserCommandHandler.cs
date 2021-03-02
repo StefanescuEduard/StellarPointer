@@ -16,6 +16,7 @@ namespace StellarPointer.Business.Commands
 
         protected override Task Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
+            request.User.Id = request.User.Username;
             return userRepository.AddAsync(request.User);
         }
     }

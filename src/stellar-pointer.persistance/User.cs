@@ -9,11 +9,11 @@ namespace StellarPointer.Persistence
 
         public string Password { get; set; }
 
-        public HashSet<string> FavoriteStellarObjects { get; set; }
+        public HashSet<string> FavoriteCelestialBodies { get; set; }
 
         public User()
         {
-            FavoriteStellarObjects = new HashSet<string>();
+            FavoriteCelestialBodies = new HashSet<string>();
         }
     }
 }
