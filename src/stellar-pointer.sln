@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "stellar-pointer.web-api", "stellar-pointer.web-api\stellar-pointer.web-api.csproj", "{3398A9A7-4D57-453F-AA39-A20DABE117AD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "stellar-pointer.persistence", "stellar-pointer.persistance\stellar-pointer.persistence.csproj", "{1FFF7FF7-E1D4-4705-B4D4-357DB0122162}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "stellar-pointer.business", "stellar-pointer.business\stellar-pointer.business.csproj", "{FAF27FA2-C1F2-4A3C-A6D2-8DD077CED87B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{3398A9A7-4D57-453F-AA39-A20DABE117AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3398A9A7-4D57-453F-AA39-A20DABE117AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3398A9A7-4D57-453F-AA39-A20DABE117AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FFF7FF7-E1D4-4705-B4D4-357DB0122162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FFF7FF7-E1D4-4705-B4D4-357DB0122162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FFF7FF7-E1D4-4705-B4D4-357DB0122162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FFF7FF7-E1D4-4705-B4D4-357DB0122162}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF27FA2-C1F2-4A3C-A6D2-8DD077CED87B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF27FA2-C1F2-4A3C-A6D2-8DD077CED87B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF27FA2-C1F2-4A3C-A6D2-8DD077CED87B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF27FA2-C1F2-4A3C-A6D2-8DD077CED87B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

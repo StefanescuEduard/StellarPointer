@@ -56,48 +56,46 @@ namespace StellarPointer.WebApi
                 servoMotorValue = 90 - Math.Abs(servoMotorValue);
             }
 
-            using (var serialPort = new SerialPort())
+            using var serialPort = new SerialPort
             {
-                serialPort.PortName = "COM6";
-                serialPort.BaudRate = 9600;
-                serialPort.Parity = Parity.None;
-                serialPort.StopBits = StopBits.One;
-                serialPort.DataBits = 8;
-                serialPort.Handshake = Handshake.None;
-                serialPort.RtsEnable = true;
+                PortName = "COM6",
+                BaudRate = 9600,
+                Parity = Parity.None,
+                StopBits = StopBits.One,
+                DataBits = 8,
+                Handshake = Handshake.None,
+                RtsEnable = true
+            };
 
-                serialPort.Open();
+            serialPort.Open();
 
-                string command = $"<S{roundedAzimuth};A{servoMotorValue};B{servoMotorValue};C{servoMotorValue}>";
+            var command = $"<S{roundedAzimuth};A{servoMotorValue};B{servoMotorValue};C{servoMotorValue}>";
 
-                serialPort.WriteLine(command);
-            }
+            serialPort.WriteLine(command);
         }
 
         private async Task<PlanetCoordinates> GetPlanetCoordinates(StellarObjectDesignation stellarObjectDesignation,
             double epochInJulianDate,
             Observer observer)
         {
-            using (var httpClient = new HttpClient())
-            {
-                string apiUrl = ephemerisApiUrlBuilder
-                    .AddName(stellarObjectDesignation)
-                    .AddEpoch(epochInJulianDate)
-                    .AddJsonMime()
-                    .AddObserver(observer)
-                    .AddCoordinateTypeOne()
-                    .AddEphemerisTypeTwo()
-                    .Build();
+            using var httpClient = new HttpClient();
+            string apiUrl = ephemerisApiUrlBuilder
+                .AddName(stellarObjectDesignation)
+                .AddEpoch(epochInJulianDate)
+                .AddJsonMime()
+                .AddObserver(observer)
+                .AddCoordinateTypeOne()
+                .AddEphemerisTypeTwo()
+                .Build();
 
-                HttpResponseMessage planetCoordinatesResponse = await httpClient.GetAsync(apiUrl);
-                planetCoordinatesResponse.EnsureSuccessStatusCode();
-                string planetCoordinatesResponseBody = await planetCoordinatesResponse.Content.ReadAsStringAsync();
+            HttpResponseMessage planetCoordinatesResponse = await httpClient.GetAsync(apiUrl);
+            planetCoordinatesResponse.EnsureSuccessStatusCode();
+            string planetCoordinatesResponseBody = await planetCoordinatesResponse.Content.ReadAsStringAsync();
 
-                var planetCoordinatesBody =
-                    JsonSerializer.Deserialize<PlanetCoordinatesBodyResponse>(planetCoordinatesResponseBody);
+            var planetCoordinatesBody =
+                JsonSerializer.Deserialize<PlanetCoordinatesBodyResponse>(planetCoordinatesResponseBody);
 
-                return planetCoordinatesBody.PlanetCoordinates.First();
-            }
+            return planetCoordinatesBody.PlanetCoordinates.First();
         }
 
         private static double GetJulianDate(DateTime date)

@@ -1,8 +1,14 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StellarPointer.Business;
+using StellarPointer.Business.Commands;
+using StellarPointer.Business.Services;
+using StellarPointer.Persistence;
+using System.Text;
 
 namespace StellarPointer.WebApi
 {
@@ -19,6 +25,22 @@ namespace StellarPointer.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddMediatR(typeof(AuthenticateCommand).Assembly);
+
+            IConfigurationSection settingsSection = Configuration.GetSection("AppSettings");
+            AppSettings settings = settingsSection.Get<AppSettings>();
+            byte[] signingKey = Encoding.UTF8.GetBytes(settings.EncryptionKey);
+            services.Configure<AppSettings>(settingsSection);
+
+            services.AddAuthentication(signingKey);
+            services.AddCouchContext<StellarPointerContext>(builder => builder
+                .UseEndpoint(settings.DatabaseSettings.ServerAddress)
+                .UseBasicAuthentication(settings.DatabaseSettings.Username, settings.DatabaseSettings.Password)
+                .EnsureDatabaseExists());
+            services.AddTransient<UserRepository>();
+            services.AddTransient<TokenService>();
+            services.AddTransient<CredentialsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,6 +53,7 @@ namespace StellarPointer.WebApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseCors(c => c.AllowAnyHeader()
