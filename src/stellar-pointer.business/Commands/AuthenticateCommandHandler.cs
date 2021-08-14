@@ -19,7 +19,7 @@ namespace StellarPointer.Business.Commands
         public async Task<string> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
         {
             await credentialsService.ValidateCredentials(request.User);
-            string securityToken = tokenService.GetToken();
+            string securityToken = tokenService.GetToken(request.User.Username);
 
             return securityToken;
         }

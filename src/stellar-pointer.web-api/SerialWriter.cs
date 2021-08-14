@@ -58,7 +58,7 @@ namespace StellarPointer.WebApi
 
             using var serialPort = new SerialPort
             {
-                PortName = "COM6",
+                PortName = SerialPort.GetPortNames().First(),
                 BaudRate = 9600,
                 Parity = Parity.None,
                 StopBits = StopBits.One,

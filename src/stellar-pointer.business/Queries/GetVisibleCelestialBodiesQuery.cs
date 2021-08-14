@@ -2,7 +2,7 @@
 
 namespace StellarPointer.Business.Queries
 {
-    public class GetTokenQuery : IRequest<string>
+    public class GetVisibleCelestialBodiesQuery : IRequest
     {
     }
 }

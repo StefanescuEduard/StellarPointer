@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StellarPointer.Business;
 using StellarPointer.Business.Commands;
+using StellarPointer.Business.Hubs;
 using StellarPointer.Business.Services;
 using StellarPointer.Persistence;
 using System.Text;
@@ -27,6 +28,8 @@ namespace StellarPointer.WebApi
             services.AddControllers();
 
             services.AddMediatR(typeof(AuthenticateCommand).Assembly);
+
+            services.AddSignalR();
 
             IConfigurationSection settingsSection = Configuration.GetSection("AppSettings");
             AppSettings settings = settingsSection.Get<AppSettings>();
@@ -63,6 +66,7 @@ namespace StellarPointer.WebApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<CelestialBodyHub>("/celestialObjects");
             });
         }
     }
